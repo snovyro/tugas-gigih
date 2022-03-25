@@ -20,20 +20,23 @@ p {
   text-align: center;
 }
   
+.main{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .card {
   background-color: #fff;
   display: grid;
-  padding: 2rem;
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+  width: 45%;
   height: fit-content;
   border-radius: 5px;
   border: 1px solid #d82148;
-}
-  
-.card:not(:first-child) {
-  margin-top: 2rem;
+  float: left;
+  padding: 1rem;
+  margin: 1rem;
+
 }
   
 .img-song img {

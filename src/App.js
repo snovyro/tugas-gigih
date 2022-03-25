@@ -1,12 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import data from "./data.js";
-import CardSong from './components/CardSong/CardSong';
+import Main from "./pages/main/main.js";
 
 function App() {
-  return <
-    CardSong data={data}
-    />
+  return (
+    <div>
+      <Main />
+    </div>
+  )
 }
 
 export default App;
