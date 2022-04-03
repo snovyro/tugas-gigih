@@ -1,5 +1,5 @@
 import React from "react";
-import CardSong from "../../components/CardSong/CardSong";
+import CardSong from "../../components/CardSong";
 
 export default function Main() {
     return (

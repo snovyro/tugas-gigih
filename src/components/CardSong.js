@@ -1,41 +1,27 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "../../components/CardSong/CardSong.css";
+import "./Card.css";
+import {
+  getToken,
+  redirectToSpotify,
+} from "../authentication/Auth";
 
-export default function CardS() {
-  const authEndpoint = "https://accounts.spotify.com/authorize";
-  const redirectUri = "http://localhost:3000/";
-  const client_id = "4209516021c744c6a1a6cab52bcb44ce";
-  const scopes = ["playlist-modify-private"];
+export default function CardSong() {
 
   const [token, setToken] = useState("");
   const [searchKey, setSearchKey] = useState("");
   const [artists, setArtists] = useState([]);
   const [songSelect, setSongSelect] = useState([]);
 
-  const redirectToSpotify = () => {
-    const loginUrl = `${authEndpoint}?client_id=${client_id}&redirect_uri=${redirectUri}&scope=${scopes.join(
-      "%20"
-    )}&response_type=token&show_dialog=true`;
-
-    return loginUrl;
-  };
-
   useEffect(() => {
-    const hash = window.location.hash;
-    let token = window.localStorage.getItem("token");
-
-    if (!token && hash) {
-      token = hash
-        .substring(1)
-        .split("&")
-        .find((elem) => elem.startsWith("access_token"))
-        .split("=")[1];
-      window.location.hash = "";
-      window.localStorage.setItem("token", token);
+    if (
+      window.localStorage.getItem("token") ||
+      !window.localStorage.getItem("token")
+    ) {
+      setToken(getToken());
     }
-    setToken(token);
   }, []);
+
 
   const logoutSpotify = () => {
     setToken("");
@@ -45,6 +31,7 @@ export default function CardS() {
   const handleSongSelect = (item) => {
     if (!songSelect.includes(item)) {
       setSongSelect([...songSelect, item]);
+      console.log([...songSelect, item])
     } else {
       setSongSelect(songSelect.filter((elem) => elem !== item));
     }
@@ -66,6 +53,7 @@ export default function CardS() {
     console.log(data);
     setArtists(data.tracks.items);
   };
+
 
   const renderArtists = () => {
     return artists.map((artist) => (
@@ -93,7 +81,11 @@ export default function CardS() {
                   Select
                 </button>
               ) : (
-                <button className="btn-deselect" id="submit" onClick={() => handleSongSelect(artist.id)}>
+                <button
+                  className="btn-deselect"
+                  id="submit"
+                  onClick={() => handleSongSelect(artist.id)}
+                >
                   Deselect
                 </button>
               )}
@@ -127,16 +119,7 @@ export default function CardS() {
         )}
       </div>
 
-      <div>
-      {!token ? (
-          <>
-          </>
-        ) : (
-          <div>
-            {renderArtists()}
-          </div>
-        )}
-        </div>
+      <div>{!token ? <></> : <div>{renderArtists()}</div>}</div>
     </div>
   );
 }
