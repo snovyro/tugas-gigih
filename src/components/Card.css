@@ -30,12 +30,18 @@ p {
   margin: 1rem;
 }
 
-.search {
-  margin: 1rem;
+.halved{
+  width: 48%;
+  float: left;
+  padding: 1rem;
 }
 
-.top-btn{
-  margin: 1rem;
+
+.search input{
+  line-height: 30px;
+  margin-top: 1rem;
+  width: 400px;
+  padding: 0 10px;
 }
 
 .card {
@@ -48,10 +54,28 @@ p {
   border: 1px solid #d82148;
   float: left;
   padding: 1rem;
-  margin: 1rem;
+  margin: 1rem 1rem 1rem 2rem;
 
 }
+
+.card-max {
+  background-color: #fff;
+  margin: auto;
+  display: grid;
+  width: 90%;
+  min-width: 700px;
+  height: 150px;
+  border-radius: 5px;
+  border: 1px solid #d82148;
+  padding: 1rem;
+  margin: 1rem auto;
+  align-content: center;
+}
   
+.centered{
+  margin: auto;
+  text-align: center;
+}
 .img-song img {
   float: left;
   width: 150px;
@@ -70,6 +94,10 @@ p {
 .artist,
 .album {
   padding: 5px 0px;
+}
+
+.separator p{
+  text-align: center;
 }
   
 .btn-card button {
@@ -90,22 +118,19 @@ p {
   opacity: 1;
 }
 
-.btn-left{
-  margin-bottom: 1rem;
-}
-
 .btn-deselect:hover{
   background-color: tomato;
 }
 .btn button {
-  display: flex;
-  flex-wrap: wrap;
+  display: block;
+  margin: auto;
   background-color: #6ebf8b;
   color: white;
   border: none;
   border-radius: 5px;
   margin-top: 1rem;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 0rem;
+  width: 400px;
   opacity: 0.7;
 }
 
