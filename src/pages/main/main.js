@@ -2,7 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Song from "../../components/Song";
-import { redirectToSpotify, getToken } from "../../authentication/Auth";
+import {
+  redirectToSpotify,
+  getToken,
+  getUserID,
+  createPlaylist,
+} from "../../authentication/Auth";
 import TempSong from "../../components/TempSong";
 
 export default function Main() {
@@ -10,6 +15,7 @@ export default function Main() {
   const [searchKey, setSearchKey] = useState("");
   const [tracks, setTracks] = useState([]);
   const [songSelect, setSongSelect] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
 
   useEffect(() => {
     if (
@@ -17,6 +23,9 @@ export default function Main() {
       !window.localStorage.getItem("token")
     ) {
       setToken(getToken());
+      getUserID(token).then((res) => {
+				setUserInfo(res);
+			})
     }
   }, []);
 
@@ -52,18 +61,39 @@ export default function Main() {
     />
   ));
 
-  const handleSongSelect = (item) => {
-    if (!songSelect.includes(item)) {
-      setSongSelect([...songSelect, item]);
-      console.log([...songSelect, item]);
+  const handleSongSelect = (track) => {
+    if (!songSelect.includes(track)) {
+      setSongSelect([...songSelect, track]);
+      console.log([...songSelect, track]);
     } else {
-      setSongSelect(songSelect.filter((elem) => elem !== item));
+      setSongSelect(songSelect.filter((elem) => elem !== track));
     }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const playlistValue = {
+      name: e.target.title.value,
+      description: e.target.description.value,
+    };
+
+    const insertSong = songSelect.map((track) => track.uri);
+    createPlaylist(userInfo.id, playlistValue, insertSong, token);
+
+    setSongSelect([]);
   };
 
   return (
     <div>
       <div>
+        <div className="btn top-btn centered">
+          {!token ? (
+            <button>
+              <a href={redirectToSpotify()}>Login</a>
+            </button>
+          ) : null}
+        </div>
         <div className="btn top-btn centered halved">
           {token ? (
             <form className="search" onSubmit={searchTracks}>
@@ -75,11 +105,7 @@ export default function Main() {
               <button type={"submit"}>Search</button>
             </form>
           ) : null}
-          {!token ? (
-            <button>
-              <a href={redirectToSpotify()}>Login</a>
-            </button>
-          ) : (
+          {!token ? null : (
             <div className="btn top-btn btn-left">
               <button onClick={logoutSpotify}>Logout</button>
             </div>
@@ -87,14 +113,19 @@ export default function Main() {
         </div>
         <div className="btn top-btn centered halved">
           {token ? (
-            <form className="search" onSubmit={searchTracks}>
+            <form className="search" onSubmit={handleSubmit}>
               <input
                 type="text"
                 placeholder="Playlist Title"
+                id="title"
+                required
                 onChange={(e) => setSearchKey(e.target.value)}
-              /><br></br>
+              />
+              <br></br>
               <input
                 type="textarea"
+                id="description"
+                required
                 placeholder="Description"
                 onChange={(e) => setSearchKey(e.target.value)}
               />
@@ -108,9 +139,7 @@ export default function Main() {
           <div className="preview-selected-tracks">{TemporarySong}</div>
         ) : null}
       </div>
-      <div className="separator">
-
-      </div>
+      <div className="separator"></div>
       <div>
         <Song
           tracks={tracks}
