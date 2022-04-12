@@ -1,12 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import Main from "./pages/main/main.js";
+import AuthRouter from './router/router';
 
 function App() {
   return (
-    <div>
-      <Main />
-    </div>
+    <>
+      <AuthRouter />
+    </>
   )
 }
 

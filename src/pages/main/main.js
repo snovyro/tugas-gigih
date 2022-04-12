@@ -1,17 +1,18 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Song from "../../components/Song";
 import {
-  redirectToSpotify,
   getToken,
   getUserID,
   createPlaylist,
 } from "../../authentication/Auth";
 import TempSong from "../../components/TempSong";
+import ContextToken from "../../context/ContextToken";
 
 export default function Main() {
-  const [token, setToken] = useState("");
+  const { token, setToken } = useContext(ContextToken);
+  // const [token, setToken] = useState("");
   const [searchKey, setSearchKey] = useState("");
   const [tracks, setTracks] = useState([]);
   const [songSelect, setSongSelect] = useState([]);
@@ -87,15 +88,9 @@ export default function Main() {
   return (
     <div>
       <div>
-        <div className="btn top-btn centered">
-          {!token ? (
-            <button>
-              <a href={redirectToSpotify()}>Login</a>
-            </button>
-          ) : null}
-        </div>
+        
         <div className="btn top-btn centered halved">
-          {token ? (
+
             <form className="search" onSubmit={searchTracks}>
               <input
                 type="text"
@@ -104,15 +99,14 @@ export default function Main() {
               />
               <button type={"submit"}>Search</button>
             </form>
-          ) : null}
-          {!token ? null : (
+
             <div className="btn top-btn btn-left">
               <button onClick={logoutSpotify}>Logout</button>
             </div>
-          )}
+
         </div>
         <div className="btn top-btn centered halved">
-          {token ? (
+
             <form className="search" onSubmit={handleSubmit}>
               <input
                 type="text"
@@ -131,7 +125,7 @@ export default function Main() {
               />
               <button type={"submit"}>Create Playlist</button>
             </form>
-          ) : null}
+
         </div>
       </div>
       <div>

@@ -66,7 +66,7 @@ const createPlaylist = async (
 };
 
 const insertSongPlaylist = async (id, tracks, token) => {
-	const response = await fetch(
+	fetch(
 		`https://api.spotify.com/v1/playlists/${id}/tracks`,
 		{
 			method: "POST",
