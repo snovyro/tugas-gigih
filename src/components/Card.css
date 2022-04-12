@@ -46,7 +46,7 @@ p {
 
 .card {
   background-color: #fff;
-  display: grid;
+  display: grid; /* GRID */
   width: 45%;
   min-width: 700px;
   height: 150px;
@@ -55,7 +55,6 @@ p {
   float: left;
   padding: 1rem;
   margin: 1rem 1rem 1rem 2rem;
-
 }
 
 .card-max {

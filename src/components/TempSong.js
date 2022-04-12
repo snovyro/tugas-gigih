@@ -13,7 +13,11 @@ export default function TempSong({ songImg, imgAlt, songTitle, artistName }) {
             <h2>{songTitle}</h2>
           </div>
           <div className="song-desc">
-            <p>{artistName.map((artist) => artist.name).join(", ")}</p>
+            <p>
+              {artistName.map((artist) => artist.name).join(", ").length > 40
+                ? `${artistName.map((artist) => artist.name).join(", ").substring(0, 40)}...`
+                : artistName.map((artist) => artist.name).join(", ")}
+            </p>
           </div>
         </div>
       </div>
