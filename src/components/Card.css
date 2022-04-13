@@ -71,6 +71,20 @@ p {
   align-content: center;
 }
   
+.nodeco {
+  text-decoration: none;
+}
+
+.white-color{
+  color: #fff;
+}
+
+.logincenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .centered{
   margin: auto;
   text-align: center;
@@ -101,8 +115,10 @@ p {
   
 .btn-card button {
   float: right;
+  /* FLEX */
   display: flex;
   flex-wrap: wrap;
+  /* FLEX */
   background-color: #6ebf8b;
   color: white;
   border: none;
