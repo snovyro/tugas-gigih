@@ -6,7 +6,7 @@ import {
   getToken,
   getUserID,
   createPlaylist,
-} from "../../authentication/Auth";
+} from "../../authentication/Auth.ts";
 import TempSong from "../../components/TempSong";
 import ContextToken from "../../context/ContextToken";
 
