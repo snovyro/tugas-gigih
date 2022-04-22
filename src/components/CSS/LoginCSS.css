@@ -1,0 +1,33 @@
+body {
+  font-family: montserrat, sans-serif;
+  color: #ffffff;
+  background-color: #191919;
+  font-size: 38px;
+}
+h2,
+p {
+  margin: 0;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.max-height{
+  height: 95vh;
+}
+
+.nodeco {
+  text-decoration: none;
+}
+
+.white-color {
+  color: #fff;
+}
+
+.login {
+  padding: 1rem;
+  font-weight: bold;
+}

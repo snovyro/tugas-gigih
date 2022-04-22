@@ -1,7 +1,10 @@
-import React from "react";
-import "./Card.css";
+import "./CSS/Card.css";
 
 export default function CardSong({ track, selectedSong, songSelect }) {
+
+  let min = Number((track.duration_ms / 60000).toFixed(0));
+	let sec = Number(((track.duration_ms % 60000) / 1000).toFixed(0));
+
   return (
     <div className="card" key={track.id}>
       <div className="content">
@@ -16,8 +19,8 @@ export default function CardSong({ track, selectedSong, songSelect }) {
         <div className="song-desc">
           <div className="title-song">
             <h2>
-              {track.name.length > 35
-                ? `${track.name.substring(0, 35)}...`
+              {track.name.length > 20
+                ? `${track.name.substring(0, 20)}...`
                 : track.name}
             </h2>
           </div>
@@ -26,6 +29,12 @@ export default function CardSong({ track, selectedSong, songSelect }) {
               {track.album.artists[0].name.length > 35
                 ? `${track.album.artists[0].name.substring(0, 35)}...`
                 : track.album.artists[0].name}
+            </p>
+          </div>
+          <div className="title-song">
+            <br/>
+            <p>
+            {`${min}:${sec}`}
             </p>
           </div>
           <br></br>

@@ -2,13 +2,12 @@ import React from "react";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Song from "../../components/Song";
-import {
-  getToken,
-  getUserID,
-  createPlaylist,
-} from "../../authentication/Auth.ts";
+import { getUserID, createPlaylist } from "../../authentication/Auth";
+import { getToken } from "../../authentication/GetToken.jsx";
 import TempSong from "../../components/TempSong";
 import ContextToken from "../../context/ContextToken";
+import Navbar from "../../components/Navbar";
+import "../../components/CSS/Main.css";
 
 export default function Main() {
   const { token, setToken } = useContext(ContextToken);
@@ -25,16 +24,10 @@ export default function Main() {
     ) {
       setToken(getToken());
       getUserID(token).then((res) => {
-				setUserInfo(res);
-			})
+        setUserInfo(res);
+      });
     }
-  }, []);
-
-  const logoutSpotify = () => {
-    setToken("");
-    setTracks([]);
-    window.localStorage.removeItem("token");
-  };
+  }, [setToken, token]);
 
   const searchTracks = async (e) => {
     e.preventDefault();
@@ -87,31 +80,34 @@ export default function Main() {
 
   return (
     <div>
-      <div>
-        
-        <div className="btn top-btn centered halved">
-
-            <form className="search" onSubmit={searchTracks}>
-              <input
-                type="text"
-                placeholder="Keyword"
-                onChange={(e) => setSearchKey(e.target.value)}
-              />
-              <button type={"submit"}>Search</button>
-            </form>
-
-            <div className="btn top-btn btn-left">
-              <button onClick={logoutSpotify}>Logout</button>
-            </div>
-
+      <Navbar />
+      <div className="row">
+        <div className="content-main ">
+          <form className="input-group" onSubmit={searchTracks}>
+            <input
+              className="form-control"
+              type="text"
+              placeholder="Keyword"
+              onChange={(e) => setSearchKey(e.target.value)}
+            />
+            <button name="search" className="btn btn-light" type={"submit"}>
+              Search
+            </button>
+          </form>
+          <Song
+            tracks={tracks}
+            selectedSong={handleSongSelect}
+            songSelect={songSelect}
+          />
         </div>
-        <div className="btn top-btn centered halved">
-
-            <form className="search" onSubmit={handleSubmit}>
+        <div className="side-content">
+          <div className="playlist-card">
+            <form className="addplaylist" onSubmit={handleSubmit}>
               <input
                 type="text"
                 placeholder="Playlist Title"
                 id="title"
+                minLength="10"
                 required
                 onChange={(e) => setSearchKey(e.target.value)}
               />
@@ -125,21 +121,13 @@ export default function Main() {
               />
               <button type={"submit"}>Create Playlist</button>
             </form>
-
+          </div>
+          <div>
+            {songSelect.length > 0 ? (
+              <div className="preview-selected-tracks">{TemporarySong}</div>
+            ) : null}
+          </div>
         </div>
-      </div>
-      <div>
-        {songSelect.length > 0 ? (
-          <div className="preview-selected-tracks">{TemporarySong}</div>
-        ) : null}
-      </div>
-      <div className="separator"></div>
-      <div>
-        <Song
-          tracks={tracks}
-          selectedSong={handleSongSelect}
-          songSelect={songSelect}
-        />
       </div>
     </div>
   );

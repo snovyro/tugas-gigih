@@ -1,0 +1,27 @@
+.card-max {
+  background-color: #fff;
+  display: grid;
+  width: 70%;
+  min-width: 70%;
+  height: fit-content;
+  border-radius: 5px;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.temp-song img {
+  height: auto;
+  min-height: 50px;
+  border-radius: 5px;
+  object-fit: cover;
+  max-width: 100%;
+}
+
+.temp-song-desc{
+    color: #191919;
+    font-size: 18px;
+    padding:1rem;
+}

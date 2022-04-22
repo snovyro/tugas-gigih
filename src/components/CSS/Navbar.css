@@ -1,0 +1,41 @@
+.nav {
+  overflow: hidden;
+  background-color: #131313;
+  padding-bottom: 0.2em
+}
+
+.nav p {
+  float: left;
+  display: block;
+  color: #ffffff;
+  text-align: center;
+  padding: 1vh 2vh;
+  text-decoration: none;
+  font-size: 34px;
+  font-weight: bold;
+}
+
+.nav .logout-btn {
+  float: right;
+}
+
+.nav .logout-btn button {
+  float: left;
+  padding: .5rem 1rem;
+  margin-top: 1rem;
+  margin-right: 2rem;
+  display:block;
+  height: fit-content;
+  background-color: #dddddd;
+  color: #131313;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+  border-radius:5px;
+}
+
+.nav .logout-btn button:hover {
+  background-color: #131313;
+  color: #ffffff;
+  transition: 0.2s all;
+}

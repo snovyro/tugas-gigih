@@ -1,5 +1,5 @@
-import React from "react";
-import CardSong from "./CardSong";
+
+import CardSong from "../components/CardSong";
 
 export default function Song({ tracks, selectedSong, songSelect }) {
   const renderTracks = () => {

@@ -7,8 +7,8 @@ import {
   Route,
   Switch,
   Redirect,
-} from "react-router-dom";  
-import { getToken } from "../authentication/Auth.ts";
+} from "react-router-dom";
+import { getToken } from "../authentication/GetToken";
 
 export default function AuthRouter() {
   const [token, setToken] = useState("");
